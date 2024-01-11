@@ -1,0 +1,48 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 3px;
+}
+
+.headerLink, .headerButton{
+  width: 50%;
+}
+
+.linkButton{
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.headerButton{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.homeContent{
+  width: 70%;
+  margin-left: 5px;
+}
+
+.submitButton{
+  width: 27%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.generalHeader{
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  padding: 5px 7px;
+}
+
+label{
+  width: 20%;
+}
+
+input{
+  margin-bottom: 5px;
+}
