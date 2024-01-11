@@ -1,5 +1,3 @@
-// Login.jsx
-
 import React, { useState } from 'react';
 import Header from '../common/GeneralHeader';
 
