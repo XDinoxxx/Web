@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../common/GeneralHeader';
+import { useNavigate } from 'react-router';
 
 const Registration = () => {
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState({
     login: '',
     password: '',
@@ -16,10 +19,33 @@ const Registration = () => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  const handleRegistration = () => {
-    // Реализовать логику регистрации, отправить данные на сервер
-    // Перенаправить пользователя на соответствующую страницу после успешной регистрации
+  const handleRegistration = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      if (response.ok) {
+        // Регистрация прошла успешно
+        const result = await response.json();
+        console.log('Пользователь успешно зарегистрирован:', result);
+        navigate('/login');
+      } else {
+        // Ошибка регистрации
+        const errorData = await response.json();
+        console.error('Ошибка регистрации:', errorData.message);
+        // Дополнительные действия, например, отображение сообщения об ошибке
+      }
+    } catch (error) {
+      console.log('Ошибка на стороне клиента:', error.message);
+      // Дополнительные действия в случае ошибки, например, отображение сообщения об ошибке
+    }
   };
+  
 
   return (
     <div>
