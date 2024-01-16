@@ -48,7 +48,7 @@ const Login = () => {
     <div>
       <Header />
       <div className='form'>
-        <h2>Вход</h2>
+        <h1>Вход</h1>
         <label>
           Логин:
           <input type='text' name='login' value={loginData.login} onChange={handleInputChange} />

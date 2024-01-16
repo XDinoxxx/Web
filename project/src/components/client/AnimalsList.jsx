@@ -23,9 +23,9 @@ function AnimalsList() {
         fetchAnimals();
     }, [userId]);
 
-    return(
+    return (
         <div>
-            <h3>Список животных</h3>
+            <h2>Список животных</h2>
             <ul>
                 {animals.map((animal) => (
                     <li key={animal.id}>{animal.name}</li>

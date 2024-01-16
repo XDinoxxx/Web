@@ -105,10 +105,10 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.post('/registration',async (req,res) =>{
-  const {login,password,first_name,last_name,address,phone,role_id} = req.body;
+app.post('/registration', async (req, res) => {
+  const { login, password, first_name, last_name, address, phone, role_id } = req.body;
 
-  try{
+  try {
     if (!login || !password || !first_name || !last_name || !address || !phone || !role_id) {
       throw new Error('Все поля должны быть заполнены');
     }
@@ -122,16 +122,40 @@ app.post('/registration',async (req,res) =>{
       phone: phone,
       role_id: role_id,
     });
-  
+
     // Дополнительные действия после успешного создания пользователя
     console.log('Пользователь успешно создан:', user);
-  } catch(error){
+  } catch (error) {
     console.error('Ошибка при запросе к базе данных: ', error);
     res.status(500).json({
       error: 'Ошибка на стороне сервера',
     });
   }
 });
+
+app.post('/client/:userId/animalform', async (req, res) => {
+  const {name, type,breed,age,user_id } = req.body;
+  try{
+    if (!name || !type || !breed || !age || !user_id) {
+      throw new Error('Все поля должны быть заполнены');
+    }
+
+    const animal = await Animals.create({
+      name: name,
+      type: type,
+      breed: breed,
+      age: age,
+      user_id: user_id,
+    });
+
+    console.log('Пользователь успешно создан:', animal);
+  } catch(error){
+    console.error('Ошибка при запросе к базе данных: ', error);
+    res.status(500).json({
+      error: 'Ошибка на стороне сервера',
+    });
+  }
+})
 
 app.get('/client/:userId', async (req, res) => {
   const { userId } = req.params;

@@ -6,7 +6,9 @@ function ClientHeader() {
     return (
         <header className="clientHeader">
             <div className="headerElem">
-                <Link to='/'>Главная</Link>
+                <Link to='/'>
+                    <button className="linkButton">Главная</button>
+                </Link>
             </div>
             <div className="headerElem">
                 <BackButton />

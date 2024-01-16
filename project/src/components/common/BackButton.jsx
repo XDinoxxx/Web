@@ -6,7 +6,7 @@ function BackButton(){
     }
 
     return (
-        <button onClick={goBack}>Назад</button>
+        <button className="linkButton" onClick={goBack}>Назад</button>
     );
 }
 

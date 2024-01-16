@@ -1,31 +1,51 @@
 import React, { useState } from "react";
 import ClientHeader from "../common/ClientHeader";
+import { useNavigate, useParams } from "react-router";
 
 function AnimalForm() {
+    const navigate = useNavigate();
+    const { userId } = useParams();
     const [animalData, setAnimalData] = useState({
         name: '',
         type: '',
         breed: '',
         age: '',
-        user_id: 1, // должно быть таким же какой вошёл пользователь
+        user_id: userId,
     });
 
     const handleInputChange = (e) => {
         setAnimalData({ ...animalData, [e.target.name]: e.target.value });
     };
 
-    const handleAnimal = () => {
-        // Реализовать добавления животного в базу данных
-        // Перенаправить пользователя на соответствующую страницу после успешного ввода
+    const handleAnimal = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/client/${userId}/animalform`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(animalData),
+            });
+            if (response.ok) {
+                const result = response.json();
+                console.log("Вы успешно добавили животное", result);
+                navigate(`http://localhost:3000/client/${userId}`);
+            } else {
+                const errorData = await response.json();
+                console.error('Ошибка добавления:', errorData.message);
+            }
+        } catch (error) {
+            console.log("Произошла ошибка при добавлении животного!");
+        }
     };
 
     return (
         <div>
             <ClientHeader />
             <div className="form">
-                <h2>Форма животного</h2>
+                <h2>Форма животного {userId}</h2>
                 <label>
-                    Логин:
+                    Имя:
                     <input type="text" name="name" value={animalData.name} onChange={handleInputChange} />
                 </label>
                 <label>

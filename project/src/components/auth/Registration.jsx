@@ -77,7 +77,7 @@ const Registration = () => {
           <input type="text" name="phone" value={userData.phone} onChange={handleInputChange} />
         </label>
         <label>
-          Роль:
+          Роль: <br></br>
           <select name="role_id" value={userData.role_id} onChange={handleInputChange}>
             <option value={1}>Клиент</option>
             <option value={2}>Петситтер</option>

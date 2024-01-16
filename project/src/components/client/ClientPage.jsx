@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ClientHeader from '../common/ClientHeader';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -16,10 +16,10 @@ const ClientPage = () => {
         <div className="form">
           <AnimalsList  />
           <Link to={`/client/${userId}/animalform`}>
-            <button>Добавить животное</button>
+            <button className='linkButton'>Добавить животное</button>
           </Link>
           <Link to={`/client/${userId}/requestform`}>
-            <button>Добавить заявку</button>
+            <button className='linkButton'>Добавить заявку</button>
           </Link>
         </div>
       </div>

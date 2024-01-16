@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../common/GeneralHeader';
-import { Link } from 'react-router-dom';
 
 function Home() {
     return (

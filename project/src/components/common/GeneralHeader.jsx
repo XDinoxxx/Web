@@ -5,7 +5,9 @@ function GeneralHeader() {
     return (
         <header className="generalHeader">
             <div className="headerLink">
-                <Link to='/'>Главная</Link>
+                <Link to='/'>
+                    <button className="linkButton">Главная</button>
+                </Link>
             </div>
             <div className="headerButton">
                 <Link to="/login">
