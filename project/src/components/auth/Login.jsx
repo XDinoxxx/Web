@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../common/GeneralHeader';
 
+
 const Login = () => {
   const navigate = useNavigate();
-
   const [loginData, setLoginData] = useState({
     login: '',
     password: '',
@@ -27,10 +27,11 @@ const Login = () => {
 
       if (response.ok) {
         const user = await response.json();
+
         if (user.role_id === 1) {
-          navigate('/client');
+          navigate(`/client/${user.id}`);
         } else if (user.role_id === 2) {
-          navigate('/petsitter');
+          navigate(`/petsitter/${user.id}`);
         } else {
           navigate('/');
         }
@@ -65,3 +66,4 @@ const Login = () => {
 };
 
 export default Login;
+

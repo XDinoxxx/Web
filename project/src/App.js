@@ -16,10 +16,10 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/registration' element={<Registration />} />
-          <Route path='/client' element={<ClientPage />} />
-          <Route path='/petsitter' element={<PetsitterPage />} />
-          <Route path='/client/animalform' element={<AnimalForm />} />
-          <Route path='/client/requestform' element={<RequestForm />} />
+          <Route path='/client/:userId' element={<ClientPage />} />
+          <Route path='/petsitter/:userId' element={<PetsitterPage />} />
+          <Route path='/client/:userId/animalform' element={<AnimalForm />} />
+          <Route path='/client/:userID/requestform' element={<RequestForm />} />
         </Routes>
       </div>
     </Router>

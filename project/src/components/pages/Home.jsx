@@ -6,8 +6,6 @@ function Home() {
     return (
         <div>
             <Header />
-            <Link to='/client' className='headerElem'>Клиент</Link>
-            <Link to='/petsitter' className='headerElem'>Петситтер</Link>
             <div className="content">
                 <h1>Добро пожаловать на сайт Пушистые Путешествия</h1>
                 <p>Приветствую тебя на нашем уникальном сервисе выгула животных – "Пушистые Путешествия"!</p>

@@ -1,7 +1,7 @@
 const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, INTEGER } = require('sequelize');
 
 const app = express();
 const cors = require('cors');
@@ -131,8 +131,26 @@ app.post('/registration',async (req,res) =>{
       error: 'Ошибка на стороне сервера',
     });
   }
-})
+});
+
+app.get('/client/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const animals = await Animals.findAll({
+      where: { user_id: userId },
+    });
+
+    res.status(200).json(animals);
+  } catch (error) {
+    console.error('Ошибка при запросе к базе данных: ', error);
+    res.status(500).json({
+      error: 'Ошибка на стороне сервера',
+    });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Сервер запущен на порту: ${port}`)
-})
+});
