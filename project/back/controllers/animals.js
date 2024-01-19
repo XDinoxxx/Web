@@ -1,16 +1,15 @@
+const validateAnimal = require("../middleware/animals");
 const animalService = require("../services/animals");
 
 class AnimalController {
     async create(req, res) {
-        const { name, type, breed, age, user_id } = req.body;
         try {
-            if (!name || !type || !breed || !age || !user_id) {
-                throw new Error('Все поля должны быть заполнены');
-            }
+            validateAnimal(req, res, () => {
+                const { name, type, breed, age, user_id } = req.body;
+                const animal = animalService.create(name, type, breed, age, user_id);
+                console.log('Пользователь успешно создан:', animal);
+            })
 
-            const animal = await animalService.create(name, type, breed, age, user_id);
-
-            console.log('Пользователь успешно создан:', animal);
         } catch (error) {
             console.error('Ошибка при запросе к базе данных: ', error);
             res.status(500).json({
