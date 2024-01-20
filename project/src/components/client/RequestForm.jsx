@@ -1,7 +1,9 @@
 import React, {useState} from "react";
-import ClientlHeader from "../common/ClientHeader";
+import ClientHeader from "../common/ClientHeader";
+import { useParams } from "react-router";
 
 function RequestForm(){
+    const { userId } = useParams();
     const [requestData, setRequestData] = useState({
         client_id: 1,
         petsitter_id: 2,
@@ -15,14 +17,27 @@ function RequestForm(){
         setRequestData({ ...requestData, [e.target.name]: e.target.value });
     };
 
-    const handleRequest = () => {
-        // Реализовать добавления заявки в базу данных
-        // Перенаправить пользователя на соответствующую страницу после успешного ввода
+    const handleRequest = async () => {
+        try{
+            const response = await fetch(`http://localhost:3000/client/${userId}/requestform`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+            if(response.ok){
+                const result = response.json();
+                console.log("Вы успешно создали заявку", result);
+            }
+        } catch(error){
+            console.log("Произошла ошибка при создании заявки!");
+        }
     };
 
     return(
         <div>
-            <ClientlHeader />
+            <ClientHeader />
             <div className="form">
                 <h2>Форма заявки</h2>
                 <label>

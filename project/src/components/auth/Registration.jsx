@@ -25,27 +25,23 @@ const Registration = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
+        },  
         body: JSON.stringify(userData),
       });
-  
+
       if (response.ok) {
-        // Регистрация прошла успешно
         const result = await response.json();
         console.log('Пользователь успешно зарегистрирован:', result);
         navigate('/login');
       } else {
-        // Ошибка регистрации
         const errorData = await response.json();
         console.error('Ошибка регистрации:', errorData.message);
-        // Дополнительные действия, например, отображение сообщения об ошибке
       }
     } catch (error) {
       console.log('Ошибка на стороне клиента:', error.message);
-      // Дополнительные действия в случае ошибки, например, отображение сообщения об ошибке
     }
   };
-  
+
 
   return (
     <div>

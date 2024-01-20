@@ -9,7 +9,6 @@ class AnimalController {
                 const animal = animalService.create(name, type, breed, age, user_id);
                 console.log('Пользователь успешно создан:', animal);
             })
-
         } catch (error) {
             console.error('Ошибка при запросе к базе данных: ', error);
             res.status(500).json({
