@@ -33,16 +33,16 @@ class UserController {
 
     async registration(req, res) {
         const { login, password, first_name, last_name, address, phone, role_id } = req.body;
-    
+
         try {
             await validateUser(req, res);
-    
+
             const user = await userService.registration(login, password, first_name, last_name, address, phone, role_id);
             console.log('Пользователь успешно создан:', user);
             const token = jwt.sign({
                 id: user.id
-            }, 'headerbearer', 
-            { expiresIn: '1h' }); // Замените на свой секретный ключ
+            }, 'headerbearer',
+                { expiresIn: '1h' }); // Замените на свой секретный ключ
             res.json({
                 message: 'Пользователь успешно создан',
                 token,
@@ -54,7 +54,7 @@ class UserController {
             });
         }
     }
-    
+
 }
 
 module.exports = new UserController();
