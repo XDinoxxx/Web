@@ -6,7 +6,7 @@ const router = express.Router();
 /**
  * @swagger
  * tags:
- *   name: Requests
+ *   name: Request
  *   description: API для работы с заявками
  */
 
@@ -15,7 +15,6 @@ const router = express.Router();
  * /client/:userId/requestform:
  *   post:
  *     summary: Создание заявки
- *     tags: [Requests]
  *     description: Создание заявки по форме.
  *     requestBody:
  *       required: true

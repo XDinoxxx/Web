@@ -10,4 +10,4 @@ const UserScheme = Joi.object({
     role_id: Joi.number().integer().required(),
 });
 
-module.exports = { UserScheme };
+module.exports = UserScheme;

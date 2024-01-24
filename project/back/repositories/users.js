@@ -28,13 +28,6 @@ class UserRepository{
             }
         })
     }
-    async getUserById(userId){
-        return await Users.findOne({
-            where: {
-                id: userId,
-            }
-        })
-    }
 }
 
 module.exports = new UserRepository();
