@@ -33,7 +33,7 @@ class UserController {
 
     async registration(req, res) {
         const { login, password, first_name, last_name, address, phone, role_id } = req.body;
-
+    
         try {
             const validationResult = UserScheme.validate({
                 login,
@@ -59,11 +59,12 @@ class UserController {
                 });
             }
             await validateUser(req, res);
-
+    
             const user = await userService.registration(login, password, first_name, last_name, address, phone, role_id);
             console.log('Пользователь успешно создан:', user);
             const token = jwt.sign({
                 id: user.id
+<<<<<<< HEAD
             }, 'headerbearer', { expiresIn: '1h' });
         res.json({
             message: 'Пользователь успешно создан',
@@ -75,6 +76,22 @@ class UserController {
             error: 'Ошибка на стороне сервера',
         });
     }
+=======
+            }, 'headerbearer', 
+            { expiresIn: '1h' }); // Замените на свой секретный ключ
+            res.json({
+                message: 'Пользователь успешно создан',
+                token,
+            });
+        } catch (error) {
+            console.error('Ошибка при запросе к базе данных: ', error);
+            res.status(500).json({
+                error: 'Ошибка на стороне сервера',
+            });
+        }
+    }
+    
+>>>>>>> parent of 956e6d9d (update)
 }
 
     async getUserById(req, res) {

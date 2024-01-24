@@ -25,6 +25,9 @@ app.use('/', requestRouter);
 swagger(app);
 
 app.listen(port, () => {
+<<<<<<< HEAD
   console.log(`Сервер запущен на порту: ${port}`);
+=======
+>>>>>>> parent of 956e6d9d (update)
   console.log(`Сервер запущен на порту: ${port}`)
 });
