@@ -36,6 +36,7 @@ const Registration = () => {
       } else {
         const errorData = await response.json();
         console.error('Ошибка регистрации:', errorData.message);
+        document.querySelector(".error-message").innerText = errorData.error;
       }
     } catch (error) {
       console.log('Ошибка на стороне клиента:', error.message);
@@ -79,6 +80,7 @@ const Registration = () => {
             <option value={2}>Петситтер</option>
           </select>
         </label>
+        <span className="error-message"></span>
         <button onClick={handleRegistration} className='submitButton'>Зарегистрироваться</button>
       </div>
     </div>

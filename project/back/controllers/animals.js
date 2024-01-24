@@ -1,14 +1,26 @@
 const validateAnimal = require("../middleware/animals");
 const animalService = require("../services/animals");
+const AnimalScheme = require("../schemes/animals");
 
 class AnimalController {
     async create(req, res) {
         try {
-            validateAnimal(req, res, () => {
-                const { name, type, breed, age, user_id } = req.body;
-                const animal = animalService.create(name, type, breed, age, user_id);
-                console.log('Пользователь успешно создан:', animal);
-            })
+            const validationResult = AnimalScheme.validate(req.body);
+
+            if (validationResult.error) {
+                return res.status(400).json({
+                    error: "Введите корректные данные! ",
+                });
+            }
+
+            const { name, type, breed, age, user_id } = req.body;
+            const animal = await animalService.create(name, type, breed, age, user_id);
+            console.log('Животное успешно создано:', animal);
+
+            res.json({
+                message: 'Животное успешно создано',
+                animal,
+            });
         } catch (error) {
             console.error('Ошибка при запросе к базе данных: ', error);
             res.status(500).json({

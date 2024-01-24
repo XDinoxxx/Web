@@ -6,7 +6,7 @@ const router = express.Router();
 /**
  * @swagger
  * tags:
- *   name: Animal
+ *   name: Animals
  *   description: API для работы с животными
  */
 
@@ -15,6 +15,7 @@ const router = express.Router();
  * /client/:userId/animalform:
  *   post:
  *     summary: Добавление животного
+ *     tags: [Animals]
  *     description: Создание заявки по форме.
  *     requestBody:
  *       required: true
@@ -46,8 +47,9 @@ router.post('/client/:userId/animalform', animalController.create);
 /**
  * @swagger
  * /client/:userId:
- *   post:
+ *   get:
  *     summary: Список животных
+ *     tags: [Animals]
  *     description: Список животных пользователя.
  *     requestBody:
  *       required: true

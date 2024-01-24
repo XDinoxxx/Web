@@ -15,6 +15,7 @@ const router = express.Router();
  * /login:
  *   post:
  *     summary: Вход пользователя
+ *     tags: [Users]
  *     description: Авторизация пользователя по логину и паролю.
  *     requestBody:
  *       required: true
@@ -43,6 +44,7 @@ router.post('/login',userController.login);
  * /registration:
  *   post:
  *     summary: Регистрация пользователя
+ *     tags: [Users]
  *     description: Регистрация нового пользователя.
  *     requestBody:
  *       required: true
@@ -75,4 +77,5 @@ router.post('/login',userController.login);
  */
 router.post('/registration', userController.registration);
 
+router.get('/client/:userId',userController.getUserById);
 module.exports = router;

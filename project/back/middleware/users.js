@@ -1,17 +1,24 @@
+// middleware/users.js
 const jwt = require('jsonwebtoken');
-const { userScheme } = require('../schemes/users');
 
 function validateUser(req, res, next) {
-    const token = req.headers.authorization;
-
-    if (!token) {
+    // Проверка наличия заголовка authorization в запросе
+    if (!req.headers || !req.headers.authorization) {
         return res.status(401).json({
             error: 'Отсутствует токен аутентификации',
         });
     }
 
+    const token = req.headers.authorization;
+
     try {
-        const decoded = jwt.verify(token, 'headerbearer');
+        // Проверка типа токена
+        if (!token.startsWith('Bearer ')) {
+            throw new Error('Неверный формат токена');
+        }
+
+        // Извлечение токена без 'Bearer '
+        const decoded = jwt.verify(token.substring(7), 'headerbearer');
         req.user = decoded;
         next();
     } catch (error) {

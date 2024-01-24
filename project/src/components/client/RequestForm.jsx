@@ -1,12 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ClientHeader from "../common/ClientHeader";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
-function RequestForm(){
+function RequestForm() {
     const { userId } = useParams();
+    const navigate = useNavigate();
+
     const [requestData, setRequestData] = useState({
-        client_id: 1,
-        petsitter_id: 2,
+        client_id: userId,
+        petsitter_id: '',
         service_type: '',
         start_time: '', // время должно как-то составляться, удачи
         end_time: '',
@@ -18,7 +20,7 @@ function RequestForm(){
     };
 
     const handleRequest = async () => {
-        try{
+        try {
             const response = await fetch(`http://localhost:3000/client/${userId}/requestform`, {
                 method: 'POST',
                 headers: {
@@ -26,28 +28,25 @@ function RequestForm(){
                 },
                 body: JSON.stringify(requestData),
             });
-            if(response.ok){
+            if (response.ok) {
                 const result = response.json();
                 console.log("Вы успешно создали заявку", result);
+                navigate(`/client/${userId}`);
+            } else {
+                const errorData = await response.json();
+                console.error('Ошибка добавления:', errorData.message);
+                document.querySelector(".error-message").innerText = errorData.error;
             }
-        } catch(error){
-            console.log("Произошла ошибка при создании заявки!");
+        } catch (error) {
+            console.log("Произошла ошибка при добавлении заявки!");
         }
     };
 
-    return(
+    return (
         <div>
             <ClientHeader />
             <div className="form">
                 <h2>Форма заявки</h2>
-                <label>
-                    ID client:
-                    <input type="text" name="client_id" value={requestData.client_id} onChange={handleInputChange} />
-                </label>
-                <label>
-                    ID petsitter:
-                    <input type="text" name="petsitter_id" value={requestData.petsitter_id} onChange={handleInputChange} />
-                </label>
                 <label>
                     Тип услуги:
                     <input type="text" name="service_type" value={requestData.service_type} onChange={handleInputChange} />
@@ -64,6 +63,7 @@ function RequestForm(){
                     Какое животное:
                     <input type="text" name="animal_id" value={requestData.animal_id} onChange={handleInputChange} />
                 </label>
+                <span className="error-message"></span>
                 <button onClick={handleRequest} className='submitButton'>Добавить</button>
             </div>
         </div>

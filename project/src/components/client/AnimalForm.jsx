@@ -29,10 +29,11 @@ function AnimalForm() {
             if (response.ok) {
                 const result = response.json();
                 console.log("Вы успешно добавили животное", result);
-                navigate(`http://localhost:3000/client/${userId}`);
+                navigate(`/client/${userId}`);
             } else {
                 const errorData = await response.json();
                 console.error('Ошибка добавления:', errorData.message);
+                document.querySelector(".error-message").innerText = errorData.error;
             }
         } catch (error) {
             console.log("Произошла ошибка при добавлении животного!");
@@ -60,6 +61,7 @@ function AnimalForm() {
                     Возраст:
                     <input type="text" name="age" value={animalData.age} onChange={handleInputChange} />
                 </label>
+                <span className="error-message"></span>
                 <button onClick={handleAnimal} className='submitButton'>Добавить</button>
             </div>
         </div>

@@ -21,6 +21,20 @@ class UserRepository{
             role_id: role_id,
         });
     }
+    async getUserByLogin(login){
+        return await Users.findAll({
+            where: {
+                login: login,
+            }
+        })
+    }
+    async getUserById(userId){
+        return await Users.findOne({
+            where: {
+                id: userId,
+            }
+        })
+    }
 }
 
 module.exports = new UserRepository();

@@ -38,6 +38,7 @@ const Login = () => {
       } else {
         const errorData = await response.json();
         console.error(`Ошибка входа: ${errorData.error}`);
+        document.querySelector(".error-message").innerText = errorData.error;
       }
     } catch (error) {
       console.error('Произошла ошибка', error);
@@ -57,6 +58,7 @@ const Login = () => {
           Пароль:
           <input type='password' name='password' value={loginData.password} onChange={handleInputChange} />
         </label>
+        <span className="error-message"></span>
         <button onClick={handleLogin} className='submitButton'>
           Войти
         </button>
